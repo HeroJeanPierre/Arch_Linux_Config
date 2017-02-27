@@ -1,0 +1,334 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+# This config file uses keycodes (bindsym) and was written for the QWERTY
+# layout.
+#
+# To get a config file with the same key positions, but for your current
+# layout, use the i3-config-wizard
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+#font pango:monospace 10
+font pango:System San Francisco Display 10
+#for_window [class="^.*"] border pixel 0
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+
+#Start Up applications
+exec terminator
+
+#Initiate tap click
+exec xinput set-prop 11 273 1
+
+#exec_always feh --bg-scale /home/julien/Pictures/V-Background.jpp
+exec_always feh --bg-scale /home/julien/Pictures/world.png
+
+# use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+set $up l
+set $down k
+set $left j
+set $right semicolon
+
+# use Mouse+Mod4 to drag floating windows to their wanted position
+floating_modifier Mod4
+
+# start a terminal
+bindsym Mod4+Return exec terminator
+bindsym Mod4+Mod1+l exec lockscreen
+
+# pull up password passmenu
+bindsym Mod4+Shift+d exec passmenu2
+
+# kill focused window
+bindsym Mod4+Shift+q kill
+
+# start dmenu (a program launcher) the -i makes it cse insensitive
+bindsym Mod4+d exec i3-dmenu-desktop --dmenu='rofi -dmenu -width 40 -lines 20 -hide-scrollbar -i'
+
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym Mod4+d exec --no-startup-id i3-dmenu-desktop
+
+#Remove the title bar
+#new_window 1pixel
+
+# change focus
+bindsym Mod4+$left focus left
+bindsym Mod4+$down focus down
+bindsym Mod4+$up focus up
+bindsym Mod4+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym Mod4+Left focus left
+bindsym Mod4+Down focus down
+bindsym Mod4+Up focus up
+bindsym Mod4+Right focus right
+
+# move focused window
+bindsym Mod4+Shift+$left move left
+bindsym Mod4+Shift+$down move down
+bindsym Mod4+Shift+$up move up
+bindsym Mod4+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym Mod4+Shift+Left move left
+bindsym Mod4+Shift+Down move down
+bindsym Mod4+Shift+Up move up
+bindsym Mod4+Shift+Right move right
+
+# split in horizontal orientation
+bindsym Mod4+h split h
+
+# split in vertical orientation
+bindsym Mod4+v split v
+
+# enter fullscreen mode for the focused container
+bindsym Mod4+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym Mod4+s layout stacking
+bindsym Mod4+w layout tabbed
+bindsym Mod4+e layout toggle split
+
+# toggle tiling / floating
+bindsym Mod4+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym Mod4+space focus mode_toggle
+
+# focus the parent container
+bindsym Mod4+a focus parent
+
+# focus the child container
+# bindsym Mod4+d focus child
+
+# move the currently focused window to the scratchpad
+bindsym Mod4+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym Mod4+minus scratchpad show
+
+set $workspace1 "1: "
+set $workspace2 "2: "
+set $workspace3 "3: "
+set $workspace4 "4: "
+set $workspace5 "5: "
+
+# switch to workspace
+bindsym Mod4+1 workspace $workspace1
+bindsym Mod4+2 workspace $workspace2
+bindsym Mod4+3 workspace $workspace3
+bindsym Mod4+4 workspace $workspace4
+bindsym Mod4+5 workspace $workspace5
+bindsym Mod4+6 workspace 6
+bindsym Mod4+7 workspace 7
+bindsym Mod4+8 workspace 8
+bindsym Mod4+9 workspace 9
+bindsym Mod4+0 workspace 10
+
+# move focused container to workspace
+bindsym Mod4+Shift+1 move container to workspace $workspace1; workspace $workspace1
+bindsym Mod4+Shift+2 move container to workspace $workspace2; workspace $workspace2
+bindsym Mod4+Shift+3 move container to workspace $workspace3; workspace $workspace3
+bindsym Mod4+Shift+4 move container to workspace $workspace4; workspace $workspace4
+bindsym Mod4+Shift+5 move container to workspace $workspace5; workspace $workspace5
+bindsym Mod4+Shift+6 move container to workspace 6; workspace 6
+bindsym Mod4+Shift+7 move container to workspace 7; workspace 7
+bindsym Mod4+Shift+8 move container to workspace 8; workspace 8
+bindsym Mod4+Shift+9 move container to workspace 9; workspace 9
+bindsym Mod4+Shift+0 move container to workspace 10;workspace 10
+
+assign [class="Google-chrome"] $workspace3
+assign [class="Atom"] $workspace2
+assign [class="Firefox"] $workspace5
+assign [class="Caprine"] $workspace4
+
+#Open Chrome Workspace 3
+bindsym Mod4+g exec google-chrome-stable http://www.isical.ac.in/~pdslab/2016/lectures/bash_cheat_sheet.pdf; workspace $workspace3
+bindsym Mod4+Shift+g exec google-chrome-stable google.com
+
+#Open Calander and wunderlist
+bindsym Mod4+c exec firefox 'https://www.wunderlist.com/webapp#/lists/today' 'https://calendar.google.com/calendar/render?tab=wc&pli=1#main_7' 'https://mail.google.com/mail/u/1/#inbox' 'https://www.timeanddate.com/stopwatch/'; workspace $workspace5;
+bindsym Mod4+Shift+c exec firefox -new-window 'https://www.wunderlist.com/webapp#/lists/today' 'https://calendar.google.com/calendar/render?tab=wc&pli=1#main_7' 'https://mail.google.com/mail/u/1/#inbox' 'https://www.timeanddate.com/stopwatch/'
+
+bindsym Mod4+m exec caprine; workspace $workspace4
+bindsym Mod4+Shift+m exec caprine
+
+
+
+#exec --no-startup-id i3-msg "${workspace3}; exec google-chrome"
+
+# reload the configuration file
+#bindsym Mod4+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym Mod4+Shift+r restart
+# exit i3 (logs you out of your X session)
+#bindsym Mod4+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym Mod4+Shift+e exit
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym Mod4+r mode "resize"
+#
+## Start i3bar to display a workspace bar (plus the system information i3status
+#
+##fsdfssdefst $fbsdgfs-cofslfsdor fs	 	 #07dafs8ds01
+#set $bg-color 	 	 #700000
+#set $inactive-bg-color	 #3d3d3d
+#set $text-color		 #ffffff
+#set $inactive-text-color #707070
+#set $urgent-bg-color	 #e53935
+#set $black		 #000000
+#
+##window colorws
+##			border		bg			text			indicator
+#client.focused		$bg-color	$bg-color		$text-color		#ffffff
+##client.unfocused	$inactive-bg-color	$inactive-bg-color	$inactive-text-color	#00ff00
+##client.focused.inactive	$inactive-bg-color	$inactive-bg-color	$inactive-text-color	#00ff00
+##client.urgent		$urgent-bg-color	$urgent-bg-color	$text-color		#00ff00	
+#
+#hide_edge_borders both
+#
+#
+#
+## finds out, if available)
+#bar {
+#        status_command i3status
+#		       
+#	colors{
+#	background $202020
+#	separator #757575
+#	#			#Border			#Background		#text
+#	focused_workspace	$101010			$black			#700000
+#	inactive_workspace  	$101010			$black			#909090
+#	urgent_workspace	$101010			$black			#909090
+#
+#
+#}
+#}
+#
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    colors {
+        # Whole color settings
+        background #1e1e1e
+        statusline #ffffff
+        separator  #1e1e1e
+
+        # Type             border  background font
+        focused_workspace  #1e1e1e #1e1e1e #cf6a4c
+        active_workspace   #1e1e1e #222222 #cf6a4c
+        inactive_workspace #1e1e1e #1e1e1e #888888
+        urgent_workspace   #1e1e1e #1e1e1e #888888
+    }
+    # i3bar position
+    position bottom
+    # Using custom i3status.conr
+    #status_command /home/julien/.config/i3/conky-i3bar.sh
+    status_command i3status
+}
+
+client.focused #9b703f #9b703f #ffffff #FF0000
+#client.unfocused #444444 #222222 #ffffff
+#client.focused          #000000 #000000 #FD9D0D #FD9D0D
+client.focused_inactive #242424 #242424 #A48E6D #FD9D0D
+client.unfocused        #242424 #242424 #A48E6D #FD9D0D
+client.urgent           #ff8000 #ff8000 #ff0000 #900000
+
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+
+
+#bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+###########################################################################
+# automatically start i3-config-wizard to offer the user to create a	  #
+# keysym-based config which used their favorite modifier (alt or windows) #
+#									  #
+# i3-config-wizard will not launch if there already is a config file	  #
+# in ~/.i3/config. 	    	      	    	       	 		  #
+#									  #
+# Please remove the following exec line:				  #
+###########################################################################	
+exec i3-config-wizard
+exec compton -f -i 85
+exec redshift
+
+for_window [class="^.*"] border pixel 0
+
+gaps inner 10
+gaps outer 10
+
+#workspace $workspace1 gaps inner 10
+#workspace $workspace1 gaps outer 10
+#workspace $workspace2 gaps inner 10
+#workspace $workspace2 gaps outer 10
+workspace $workspace3 gaps inner 0
+workspace $workspace3 gaps outer 0
+#workspace $workspace4 gaps inner 10
+#workspace $workspace4 gaps outer 10
+#workspace $workspace5 gaps inner 10
+#workspace $workspace5 gaps outer 10
+#workspace 6 gaps inner 10
+#workspace 6 gaps outer 10
+#workspace 7 gaps inner 10
+#workspace 7 gaps outer 10
+#workspace 8 gaps inner 10
+#workspace 8 gaps outer 10
+#workspace 9 gaps inner 10
+#workspace 9 gaps outer 10
+#workspace 10 gaps inner 10
+##workspace 10 gaps outer 10
